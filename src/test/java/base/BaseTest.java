@@ -1,0 +1,51 @@
+package base;
+
+import threadqa_testing.Pages.BasePage;
+import lombok.*;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import org.openqa.selenium.TimeoutException;
+import org.openqa.selenium.WebDriver;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
+import static threadqa_testing.utils.Driver.getDriver;
+
+
+public class BaseTest {
+
+    protected BasePage basePage;
+    protected WebDriver driver;
+
+    @Getter
+    private static final String BASE_URL = "https://lms.threadqa.ru/";
+
+    @BeforeClass
+    @Parameters ("browser")
+    public void load(@Optional("chrome") String browser) {
+        switch (browser) {
+            case "firefox" -> {
+                driver = getDriver("firefox");
+                driver.manage().window().maximize();
+
+            }
+
+            case "chrome" -> {
+                driver = getDriver("chrome");
+                driver.manage().window().maximize();
+            }
+
+            case "edge" -> {
+                driver = getDriver("edge");
+                driver.manage().window().maximize();
+            }
+        }
+    }
+    @AfterSuite(alwaysRun = true)
+    public void tearDown() {
+        driver.quit();
+    }
+}
