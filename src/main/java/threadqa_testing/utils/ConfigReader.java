@@ -8,7 +8,7 @@ public class ConfigReader {
 
     public ConfigReader(String propertiesName) {
         String fileName = switch (propertiesName) {
-            case "Creds" -> "src/test/java/resources/Creds.properties";
+            case "Creds" -> "Creds.properties";
             default -> throw new IllegalArgumentException(
                     "Неизвестное имя конфигурации. Используйте 'user-creds.properties' или 'dataBase.properties'."
             );

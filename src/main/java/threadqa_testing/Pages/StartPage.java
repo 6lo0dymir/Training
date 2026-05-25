@@ -1,5 +1,6 @@
 package threadqa_testing.Pages;
 
+import io.qameta.allure.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.*;
 
@@ -21,5 +22,18 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//button[@type=\"submit\"]")
     private WebElement enterButton;
 
+    @FindBy(xpath = "//button[@id=\"radix-_r_5a_\"]")
+    private WebElement userPopUpMenuButton;
+
+    @FindBy(xpath = "//span[text()=\"Выйти из аккаунта\"]")
+    private WebElement exitFromAccountButton;
+
+    @Step("Вход в приложение по email")
+    public void loginByEmail(String email, String password) {
+        clickElement(loginButton)
+                .sendKeysToElement(inputLogin, email)
+                .sendKeysToElement(inputPassword, password)
+                .clickElement(enterButton);
+    }
 
 }

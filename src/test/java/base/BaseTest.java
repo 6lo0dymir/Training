@@ -30,17 +30,20 @@ public class BaseTest {
             case "firefox" -> {
                 driver = getDriver("firefox");
                 driver.manage().window().maximize();
+                driver.get(BASE_URL);
 
             }
 
             case "chrome" -> {
                 driver = getDriver("chrome");
                 driver.manage().window().maximize();
+                driver.get(BASE_URL);
             }
 
             case "edge" -> {
                 driver = getDriver("edge");
                 driver.manage().window().maximize();
+                driver.get(BASE_URL);
             }
         }
     }
