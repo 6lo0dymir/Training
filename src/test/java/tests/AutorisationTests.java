@@ -19,10 +19,18 @@ public class AutorisationTests extends BaseTest {
         startPage = new StartPage(driver);
         credsreader = new ConfigReader("Creds");
     }
-    @Test(description = "Позитивный тест с валидным логином и паролем")
+    /**@Test(description = "Позитивный тест с валидным логином и паролем")
     public void loginWithValidLoginAndPassword(){
 
         startPage.loginByEmail(
+                credsreader.getLogin(),
+                credsreader.getPassword()
+        );
+    }*/
+    @Test(description = "Позитивный тест с валидным логином и паролем и JS")
+    public void loginWithValidLoginAndPasswordWithJS(){
+
+        startPage.loginByEmailWithJS(
                 credsreader.getLogin(),
                 credsreader.getPassword()
         );

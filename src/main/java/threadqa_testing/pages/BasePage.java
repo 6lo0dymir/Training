@@ -27,11 +27,25 @@ public class BasePage {
     @FindBy (xpath = "//a[@aria-label=\"ThreadQA — главная\"]")
     private WebElement title;
 
+    @Step("JS клик по элементу")
+    protected void clickWithJS(WebElement webElement){
+        ((JavascriptExecutor)driver).executeScript("arguments[0].click();",webElement);
+    }
+
     @Step("Клик по элементу")
     public BasePage clickElement(WebElement webElement) {
         wait.until(ExpectedConditions.elementToBeClickable(webElement));
         webElement.click();
         return this;
+    }
+
+    @Step("Клик по элементу с JS")
+    public void clickElementWithJS(WebElement webElement) {
+        try {
+            webElement.click();
+        } catch (ElementClickInterceptedException e) {
+            clickWithJS(webElement);
+        }
     }
 
     @Step("Пролистать страницу до элемента и кликнуть по нему")

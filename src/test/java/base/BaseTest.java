@@ -23,7 +23,7 @@ public class BaseTest {
     @BeforeClass
     public void load(){
         String browser = System.getProperty("browser", "chrome");
-        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
 
         switch (browser) {
             case "firefox" -> {

@@ -13,6 +13,7 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//button[text()=\"Начать бесплатно\"]")
     private WebElement loginButton;
 
+
     @FindBy(xpath = "//input[@id=\"login-email\"]")
     private WebElement inputLogin;
 
@@ -34,6 +35,13 @@ public class StartPage extends BasePage {
                 .sendKeysToElement(inputLogin, email)
                 .sendKeysToElement(inputPassword, password)
                 .clickElement(enterButton);
+    }
+    @Step("Вход в приложение по email используя JS")
+    public void loginByEmailWithJS(String email, String password) {
+        clickElement(loginButton)
+                .sendKeysToElement(inputLogin, email)
+                .sendKeysToElement(inputPassword, password)
+                .clickElementWithJS(enterButton);
     }
 
 }
