@@ -11,6 +11,7 @@ public class Driver {
 
     private static WebDriver driver;
 
+
     /** Приватный конструктор */
     private Driver() {}
 
@@ -19,6 +20,8 @@ public class Driver {
      * @param browserName "chrome", "firefox", "edge"
      * @return WebDriver
      */
+
+
     public static WebDriver getDriver(String browserName) {
         if (driver != null) {
             return driver; // уже создан
@@ -37,6 +40,7 @@ public class Driver {
             default:
                 throw new IllegalArgumentException("Unsupported browser: " + browserName);
         }
+
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
         driver.manage().window().maximize();

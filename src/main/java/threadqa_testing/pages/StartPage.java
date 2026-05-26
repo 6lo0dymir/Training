@@ -1,4 +1,4 @@
-package threadqa_testing.Pages;
+package threadqa_testing.pages;
 
 import io.qameta.allure.*;
 import org.openqa.selenium.*;

@@ -1,17 +1,13 @@
 package base;
 
-import threadqa_testing.Pages.BasePage;
+import threadqa_testing.pages.BasePage;
 import lombok.*;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
+
 import static threadqa_testing.utils.Driver.getDriver;
 
 
@@ -25,7 +21,7 @@ public class BaseTest {
 
     @BeforeClass
     @Parameters ("browser")
-    public void load(@Optional("chrome") String browser) {
+    public void load(@Optional("chrome") String browser){
         switch (browser) {
             case "firefox" -> {
                 driver = getDriver("firefox");
@@ -36,7 +32,7 @@ public class BaseTest {
 
             case "chrome" -> {
                 driver = getDriver("chrome");
-                driver.manage().window().maximize();
+                System.setProperty("webdriver.chrome.args", "--headless=new");
                 driver.get(BASE_URL);
             }
 

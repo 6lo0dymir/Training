@@ -3,7 +3,7 @@ package tests;
 import base.BaseTest;
 import io.qameta.allure.*;
 import org.testng.annotations.*;
-import threadqa_testing.Pages.*;
+import threadqa_testing.pages.*;
 import threadqa_testing.utils.*;
 
 
