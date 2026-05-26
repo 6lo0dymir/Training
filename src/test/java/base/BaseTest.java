@@ -8,6 +8,7 @@ import org.testng.annotations.Parameters;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 
+
 import static threadqa_testing.utils.Driver.getDriver;
 
 
@@ -20,28 +21,37 @@ public class BaseTest {
     private static final String BASE_URL = "https://lms.threadqa.ru/";
 
     @BeforeClass
-    @Parameters ("browser")
-    public void load(@Optional("chrome") String browser){
+    public void load(){
+        String browser = System.getProperty("browser", "chrome");
+        boolean headless = Boolean.parseBoolean(System.getProperty("headless", "false"));
+
         switch (browser) {
             case "firefox" -> {
-                driver = getDriver("firefox");
-                driver.manage().window().maximize();
-                driver.get(BASE_URL);
+                driver = getDriver("firefox",headless);
+                if (!headless) {
+                    driver.manage().window().maximize();
+                }
 
             }
 
             case "chrome" -> {
-                driver = getDriver("chrome");
-                System.setProperty("webdriver.chrome.args", "--headless=new");
-                driver.get(BASE_URL);
+                driver = getDriver("chrome",headless);
+                if (!headless) {
+                    driver.manage().window().maximize();
+                }
+
             }
 
             case "edge" -> {
-                driver = getDriver("edge");
-                driver.manage().window().maximize();
-                driver.get(BASE_URL);
+                driver = getDriver("edge",headless);
+                if (!headless) {
+                    driver.manage().window().maximize();
+                }
+
             }
+            default -> throw new IllegalArgumentException("Unknown browser: " + browser);
         }
+        driver.get(BASE_URL);
     }
     @AfterSuite(alwaysRun = true)
     public void tearDown() {
