@@ -3,6 +3,9 @@ package threadqa_testing.pages;
 import io.qameta.allure.*;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.*;
+import org.openqa.selenium.support.ui.*;
+
+import java.time.*;
 
 public class StartPage extends BasePage {
 
@@ -12,7 +15,6 @@ public class StartPage extends BasePage {
 
     @FindBy(xpath = "//button[text()=\"Начать бесплатно\"]")
     private WebElement loginButton;
-
 
     @FindBy(xpath = "//input[@id=\"login-email\"]")
     private WebElement inputLogin;
@@ -29,6 +31,12 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//span[text()=\"Выйти из аккаунта\"]")
     private WebElement exitFromAccountButton;
 
+    @FindBy(xpath = "//p[text()=\"Неверный email или пароль\"]")
+    private WebElement invalidLoginOrPassword;
+
+    @FindBy(xpath = "//p[contains(text(), \"Вход выполнен! Перенаправляем...\")]")
+    private WebElement sucsessfulLoginMessage;
+
     @Step("Вход в приложение по email")
     public void loginByEmail(String email, String password) {
         clickElement(loginButton)
@@ -43,5 +51,11 @@ public class StartPage extends BasePage {
                 .sendKeysToElement(inputPassword, password)
                 .clickElementWithJS(enterButton);
     }
+    @Step("Получить сообщение об ошибке в логине/пароле")
+    public String getErrorMessageLoginPassword(){
+        return invalidLoginOrPassword.getText();
+
+    }
+
 
 }

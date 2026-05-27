@@ -31,23 +31,18 @@ public class BaseTest {
                 if (!headless) {
                     driver.manage().window().maximize();
                 }
-
             }
-
             case "chrome" -> {
                 driver = getDriver("chrome",headless);
                 if (!headless) {
                     driver.manage().window().maximize();
                 }
-
             }
-
             case "edge" -> {
                 driver = getDriver("edge",headless);
                 if (!headless) {
                     driver.manage().window().maximize();
                 }
-
             }
             default -> throw new IllegalArgumentException("Unknown browser: " + browser);
         }

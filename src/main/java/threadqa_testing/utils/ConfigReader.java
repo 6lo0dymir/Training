@@ -10,7 +10,7 @@ public class ConfigReader {
         String fileName = switch (propertiesName) {
             case "Creds" -> "Creds.properties";
             default -> throw new IllegalArgumentException(
-                    "Неизвестное имя конфигурации. Используйте 'user-creds.properties' или 'dataBase.properties'."
+                    "Неизвестное имя конфигурации. Используйте 'Creds.properties'."
             );
         };
 
@@ -29,4 +29,6 @@ public class ConfigReader {
 
     public String getLogin(){return properties.getProperty("LOGIN");}
     public String getPassword(){return properties.getProperty("PASSWORD");}
+    public String getInvalidLogin(){return properties.getProperty("INVALIDLOGIN");}
+    public String getInvalidPassword(){return properties.getProperty("INVALIDPASSWORD");}
 }

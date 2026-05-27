@@ -25,7 +25,7 @@ public class Driver {
      */
     public static WebDriver getDriver(String browserName) {
         if (driver != null) {
-            return driver; // уже создан
+            return driver;
         }
 
         switch (browserName.toLowerCase().trim()) {

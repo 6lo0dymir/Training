@@ -27,6 +27,7 @@ public class BasePage {
     @FindBy (xpath = "//a[@aria-label=\"ThreadQA — главная\"]")
     private WebElement title;
 
+    /** Клик по элементу с использованием JS */
     @Step("JS клик по элементу")
     protected void clickWithJS(WebElement webElement){
         ((JavascriptExecutor)driver).executeScript("arguments[0].click();",webElement);
@@ -38,7 +39,7 @@ public class BasePage {
         webElement.click();
         return this;
     }
-
+    /** При перехвате клика по элементу обычным способом, совершаем клик через JS */
     @Step("Клик по элементу с JS")
     public void clickElementWithJS(WebElement webElement) {
         try {
@@ -47,6 +48,7 @@ public class BasePage {
             clickWithJS(webElement);
         }
     }
+
 
     @Step("Пролистать страницу до элемента и кликнуть по нему")
     public void waitMoveAndClickElement(WebElement webElement) {
@@ -63,5 +65,8 @@ public class BasePage {
         return this;
     }
 
-
+    @Step("Получить текст из элемента")
+    public String getTextFromElement(WebElement webElement){
+        return webElement.getText();
+    }
 }
