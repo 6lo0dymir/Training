@@ -13,7 +13,6 @@ public class Driver {
 
     /**
      * Всегда создаёт НОВЫЙ экземпляр WebDriver.
-     * Не использует синглтон.
      */
     public static WebDriver getDriver(String browserName, boolean headless) {
         WebDriver driver;
