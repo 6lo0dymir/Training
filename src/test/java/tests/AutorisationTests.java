@@ -56,7 +56,7 @@ public class AutorisationTests extends BaseTest {
             Print.printMessage("Ошибка валидации: " + e.getMessage());
         }
     }
-    @Test(description = "Негативный тест - невалидный логин, валидный пароль")
+    @Test(description = "Негативный тест - валидный логин, невалидный пароль")
     public void loginWithValidLoginAndInvalidPassword(){
 
         startPage.loginByEmailWithJS(
