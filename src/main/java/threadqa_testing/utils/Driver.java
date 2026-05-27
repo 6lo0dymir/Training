@@ -7,15 +7,22 @@ import org.openqa.selenium.firefox.*;
 import java.time.Duration;
 
 public class Driver {
+    private static WebDriver driver;
 
-    private Driver() {
-    }
+    private Driver() { }
 
-    /**
-     * Всегда создаёт НОВЫЙ экземпляр WebDriver.
-     */
     public static WebDriver getDriver(String browserName, boolean headless) {
-        WebDriver driver;
+
+        if (driver != null) {
+            try {
+                driver.getCurrentUrl();
+                return driver;
+            } catch (Exception e) {
+                System.out.println("Драйвер невалиден, создаем новый: " + e.getMessage());
+                driver = null;
+            }
+        }
+
 
         switch (browserName.toLowerCase().trim()) {
             case "chrome":
@@ -26,7 +33,6 @@ public class Driver {
                 }
                 driver = new ChromeDriver(chromeOptions);
                 break;
-
             case "firefox":
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 if (headless) {
@@ -35,7 +41,6 @@ public class Driver {
                 }
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
-
             case "edge":
                 EdgeOptions edgeOptions = new EdgeOptions();
                 if (headless) {
@@ -44,9 +49,8 @@ public class Driver {
                 }
                 driver = new EdgeDriver(edgeOptions);
                 break;
-
             default:
-                throw new IllegalArgumentException("Неизвестный браузер: " + browserName);
+                throw new IllegalArgumentException("Unsupported browser: " + browserName);
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -55,10 +59,15 @@ public class Driver {
         return driver;
     }
 
-    /**
-     * Перегрузка для обратной совместимости
-     */
-    public static WebDriver getDriver(String browserName) {
-        return getDriver(browserName, false);
+    public static void quitDriver() {
+        if (driver != null) {
+            try {
+                driver.quit();
+            } catch (Exception e) {
+                System.out.println("Ошибка при закрытии драйвера: " + e.getMessage());
+            } finally {
+                driver = null;
+            }
+        }
     }
 }
