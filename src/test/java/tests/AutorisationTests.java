@@ -17,7 +17,7 @@ public class AutorisationTests extends BaseTest {
     private StartPage startPage;
     private ConfigReader credsreader;
 
-    @BeforeClass
+    @BeforeMethod
     void SetUp(){
         startPage = new StartPage(driver);
 

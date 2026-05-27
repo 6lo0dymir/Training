@@ -1,12 +1,9 @@
 package base;
 
+import org.testng.annotations.*;
 import threadqa_testing.pages.BasePage;
 import lombok.*;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Optional;
-import org.testng.annotations.Parameters;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterSuite;
 
 
 import static threadqa_testing.utils.Driver.getDriver;
@@ -20,7 +17,7 @@ public class BaseTest {
     @Getter
     private static final String BASE_URL = "https://lms.threadqa.ru/";
 
-    @BeforeClass
+    @BeforeMethod
     public void load(){
         String browser = System.getProperty("browser", "chrome");
         boolean headless = Boolean.parseBoolean(System.getProperty("headless", "true"));
@@ -48,8 +45,10 @@ public class BaseTest {
         }
         driver.get(BASE_URL);
     }
-    @AfterSuite(alwaysRun = true)
+    @AfterMethod
     public void tearDown() {
-        driver.quit();
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }

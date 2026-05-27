@@ -4,61 +4,19 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.*;
 import org.openqa.selenium.edge.*;
 import org.openqa.selenium.firefox.*;
-
-import java.time.*;
+import java.time.Duration;
 
 public class Driver {
 
-    private static WebDriver driver;
-
-    /**
-     * Приватный конструктор
-     */
     private Driver() {
     }
 
     /**
-     * Создаёт или возвращает текущий экземпляр WebDriver.
-     *
-     * @param browserName "chrome", "firefox", "edge"
-     * @return WebDriver
-     */
-    public static WebDriver getDriver(String browserName) {
-        if (driver != null) {
-            return driver;
-        }
-
-        switch (browserName.toLowerCase().trim()) {
-            case "chrome":
-                driver = new ChromeDriver();
-                break;
-            case "firefox":
-                driver = new FirefoxDriver();
-                break;
-            case "edge":
-                driver = new EdgeDriver();
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browserName);
-        }
-
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-        driver.manage().window().maximize();
-
-        return driver;
-    }
-
-    /**
-     * Создаёт или возвращает текущий экземпляр WebDriver с поддержкой headless режима.
-     *
-     * @param browserName "chrome", "firefox", "edge"
-     * @param headless    true - браузер без GUI, false - обычный режим
-     * @return WebDriver
+     * Всегда создаёт НОВЫЙ экземпляр WebDriver.
+     * Не использует синглтон.
      */
     public static WebDriver getDriver(String browserName, boolean headless) {
-        if (driver != null) {
-            return driver;
-        }
+        WebDriver driver;
 
         switch (browserName.toLowerCase().trim()) {
             case "chrome":
@@ -89,7 +47,7 @@ public class Driver {
                 break;
 
             default:
-                throw new IllegalArgumentException("Unsupported browser: " + browserName);
+                throw new IllegalArgumentException("Неизвестный браузер: " + browserName);
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
@@ -99,12 +57,9 @@ public class Driver {
     }
 
     /**
-     * Закрывает драйвер
+     * Перегрузка для обратной совместимости
      */
-    public static void quitDriver() {
-        if (driver != null) {
-            driver.quit();
-            driver = null;
-        }
+    public static WebDriver getDriver(String browserName) {
+        return getDriver(browserName, false);
     }
 }
