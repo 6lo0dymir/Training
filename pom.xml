@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.aston</groupId>
-    <artifactId>a-sber_ui-web_aqa</artifactId>
+    <artifactId>TrainingTestUi</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -72,9 +72,6 @@
                             <value>${project.build.directory}/allure-results</value>
                         </property>
                     </systemProperties>
-                    <suiteXmlFiles>
-                        <suiteXmlFile>src/test/resources/testng.xml</suiteXmlFile>
-                    </suiteXmlFiles>
 
                 </configuration>
                 <dependencies>
